@@ -80,3 +80,6 @@ class MinesweeperGame:
                                 if self.board.check_win():
                                     self.is_game_over = True
                                     self.is_win = True
+                    
+                    elif event.button == 3:
+                        self.board.grid[grid_y][grid_x].toggle_flag()
