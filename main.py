@@ -98,3 +98,17 @@ class MinesweeperGame:
             
             clock.tick(30)
 
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser(description="Гра Сапер на Pygame")
+    parser.add_argument('--rows', type=int, default=10, help='Кількість рядків')
+    parser.add_argument('--cols', type=int, default=10, help='Кількість стовпців')
+    parser.add_argument('--mines', type=int, default=15, help='Кількість мін')
+    
+    args = parser.parse_args()
+    
+    if args.mines >= args.rows * args.cols:
+        print("Помилка: кількість мін не може бути більшою або рівною кількості клітинок!")
+        sys.exit(1)
+        
+    game = MinesweeperGame(args.rows, args.cols, args.mines)
+    game.run()
