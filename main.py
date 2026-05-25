@@ -65,4 +65,9 @@ class Board:
             return
 
         cell.reveal()
+        
+        if cell.neighbor_mines == 0 and not cell.is_mine:
+            directions = [(-1, -1), (-1, 0), (-1, 1), (0, -1), (0, 1), (1, -1), (1, 0), (1, 1)]
+            for dx, dy in directions:
+                self.reveal_cell(x + dx, y + dy)
 
