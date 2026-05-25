@@ -50,3 +50,9 @@ class MinesweeperGame:
                             pygame.draw.circle(self.screen, COLOR_FLAG, rect.center, CELL_SIZE // 4)
                     
         pygame.display.flip()
+
+    def handle_events(self):
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                sys.exit()
