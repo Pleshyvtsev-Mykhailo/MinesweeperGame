@@ -41,3 +41,17 @@ class Board:
                 mines_placed += 1
         self.calculate_neighbors()
         self.mines_generated = True
+    
+    def calculate_neighbors(self):
+        directions = [(-1, -1), (-1, 0), (-1, 1), (0, -1), (0, 1), (1, -1), (1, 0), (1, 1)]
+        for y in range(self.rows):
+            for x in range(self.cols):
+                if self.grid[y][x].is_mine:
+                    continue
+                count = 0
+                for dx, dy in directions:
+                    nx, ny = x + dx, y + dy
+                    if 0 <= nx < self.cols and 0 <= ny < self.rows:
+                        if self.grid[ny][nx].is_mine:
+                            count += 1
+                self.grid[y][x].neighbor_mines = count
