@@ -65,9 +65,17 @@ class Board:
             return
 
         cell.reveal()
-        
+
         if cell.neighbor_mines == 0 and not cell.is_mine:
             directions = [(-1, -1), (-1, 0), (-1, 1), (0, -1), (0, 1), (1, -1), (1, 0), (1, 1)]
             for dx, dy in directions:
                 self.reveal_cell(x + dx, y + dy)
+    
+    def check_win(self):
+        for y in range(self.rows):
+            for x in range(self.cols):
+                cell = self.grid[y][x]
+                if not cell.is_mine and not cell.is_revealed:
+                    return False
+        return True
 
