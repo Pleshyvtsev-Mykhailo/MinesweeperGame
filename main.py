@@ -11,3 +11,13 @@ class Cell:
         self.is_revealed = False
         self.is_flagged = False
         self.neighbor_mines = 0
+    
+    def toggle_flag(self):
+        if not self.is_revealed:
+            self.is_flagged = not self.is_flagged
+
+    def reveal(self):
+        if self.is_flagged or self.is_revealed:
+            return True 
+        self.is_revealed = True
+        return not self.is_mine
