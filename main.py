@@ -56,3 +56,27 @@ class MinesweeperGame:
             if event.type == pygame.QUIT:
                 pygame.quit()
                 sys.exit()
+            
+            if event.type == pygame.MOUSEBUTTONDOWN and not self.is_game_over:
+                x, y = event.pos
+                grid_x = x // (CELL_SIZE + MARGIN)
+                grid_y = y // (CELL_SIZE + MARGIN)
+
+                if 0 <= grid_x < self.cols and 0 <= grid_y < self.rows:
+                    if event.button == 1:
+                        if not self.board.mines_generated:
+                            self.board.generate_mines(grid_x, grid_y)
+                        
+                        if not self.board.grid[grid_y][grid_x].is_flagged:
+                            if self.board.grid[grid_y][grid_x].is_mine:
+                                self.is_game_over = True
+
+                                for row in self.board.grid:
+                                    for c in row:
+                                        if c.is_mine:
+                                            c.is_revealed = True
+                            else:
+                                self.board.reveal_cell(grid_x, grid_y)
+                                if self.board.check_win():
+                                    self.is_game_over = True
+                                    self.is_win = True
