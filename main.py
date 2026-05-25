@@ -130,6 +130,23 @@ class MinesweeperGame:
                     if cell.is_flagged:
                             pygame.draw.circle(self.screen, COLOR_FLAG, rect.center, CELL_SIZE // 4)
                     
+        if self.is_game_over:
+            overlay = pygame.Surface((self.screen.get_width(), self.screen.get_height()))
+            overlay.set_alpha(100)
+            if self.is_win:
+                overlay.fill((34, 139, 34))
+                msg = "VICTORY!"
+            else:
+                overlay.fill((139, 0, 0))
+                msg = "GAME OVER!"
+
+            self.screen.blit(overlay, (0, 0))
+
+            final_font = pygame.font.SysFont('Arial', 36, bold=True)
+            text_surface = final_font.render(msg, True, (255, 255, 255))
+            text_rect = text_surface.get_rect(center=(self.screen.get_width() // 2, self.screen.get_height() // 2))
+            self.screen.blit(text_surface, text_rect)
+
         pygame.display.flip()
 
     def handle_events(self):
