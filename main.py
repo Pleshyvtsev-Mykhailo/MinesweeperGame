@@ -55,3 +55,14 @@ class Board:
                         if self.grid[ny][nx].is_mine:
                             count += 1
                 self.grid[y][x].neighbor_mines = count
+    
+    def reveal_cell(self, x, y):
+        if not (0 <= x < self.cols and 0 <= y < self.rows):
+            return
+        cell = self.grid[y][x]
+        
+        if cell.is_revealed or cell.is_flagged:
+            return
+
+        cell.reveal()
+
