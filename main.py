@@ -23,3 +23,14 @@ class MinesweeperGame:
         
         self.is_game_over = False
         self.is_win = False
+    
+    def draw(self):
+        self.screen.fill(COLOR_BG)
+        for y in range(self.rows):
+            for x in range(self.cols):
+                cell = self.board.grid[y][x]
+                rect = pygame.Rect(
+                    MARGIN + x * (CELL_SIZE + MARGIN),
+                    MARGIN + y * (CELL_SIZE + MARGIN),
+                    CELL_SIZE, CELL_SIZE
+                )
