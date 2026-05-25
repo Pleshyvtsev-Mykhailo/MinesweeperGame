@@ -83,3 +83,18 @@ class MinesweeperGame:
                     
                     elif event.button == 3:
                         self.board.grid[grid_y][grid_x].toggle_flag()
+
+    def run(self):
+        clock = pygame.time.Clock()
+        while True:
+            self.handle_events()
+            self.draw()
+            
+            if self.is_game_over:
+                if self.is_win:
+                    pygame.display.set_caption("Minesweeper - ПЕРЕМОГА!")
+                else:
+                    pygame.display.set_caption("Minesweeper - ПРОГРАШ!")
+            
+            clock.tick(30)
+
