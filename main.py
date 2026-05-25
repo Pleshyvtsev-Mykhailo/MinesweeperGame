@@ -34,3 +34,12 @@ class MinesweeperGame:
                     MARGIN + y * (CELL_SIZE + MARGIN),
                     CELL_SIZE, CELL_SIZE
                 )
+
+            if cell.is_revealed:
+                pygame.draw.rect(self.screen, COLOR_REVEALED, rect)
+                if cell.is_mine:
+                    pygame.draw.circle(self.screen, COLOR_MINE, rect.center, CELL_SIZE // 3)
+                elif cell.neighbor_mines > 0:
+                    text = self.font.render(str(cell.neighbor_mines), True, COLOR_TEXT)
+                    text_rect = text.get_rect(center=rect.center)
+                    self.screen.blit(text, text_rect)
