@@ -21,3 +21,11 @@ class Cell:
             return True 
         self.is_revealed = True
         return not self.is_mine
+
+class Board:
+    def __init__(self, rows, cols, num_mines):
+        self.rows = rows
+        self.cols = cols
+        self.num_mines = num_mines
+        self.grid = [[Cell(x, y) for x in range(cols)] for y in range(rows)]
+        self.mines_generated = False
